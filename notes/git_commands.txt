@@ -4,11 +4,25 @@ git commit -m "Setup AI learning project structure"
 git push
 
 
-git checkout -b lesson1-python-basics
 # do your work...
+git checkout -b name-of-branch
 git add .
-git commit -m "Finish lesson 1"
-git push -u origin lesson1-python-basics
+git commit -m "Descriptive name of this commit"
+git push -u origin lesson1-python-basics # -u means upstream, now onwards you can just type git push
 
-if remove repo changed:
+#more commit on the branch 
+git add .
+git commit -m "Descriptive name of this new commit"
+git push
+
+#merge to main once satisfied after testing scripts
+git checkout main
+git merge name-of-branch
+git push
+
+#delete branch 
+git branch -d name-of-branch            #deletes local branch
+git push origin --delete name-of-branch #deletes remote branch 
+
+if remote repo changed:
 git pull --rebase
