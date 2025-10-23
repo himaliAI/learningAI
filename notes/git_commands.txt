@@ -1,0 +1,14 @@
+git status #if you want to check changes
+git add .
+git commit -m "Setup AI learning project structure"
+git push
+
+
+git checkout -b lesson1-python-basics
+# do your work...
+git add .
+git commit -m "Finish lesson 1"
+git push -u origin lesson1-python-basics
+
+if remove repo changed:
+git pull --rebase

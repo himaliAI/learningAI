@@ -1,5 +1,88 @@
+# ========================================
+# 📦 AI Learning Project .gitignore
+# Works for: VS Code + Python + ML/DL Projects
+# ========================================
+
+# ----------------------------
+# OS-specific
+# ----------------------------
+.DS_Store
+Thumbs.db
+
+# ----------------------------
+# VS Code
+# ----------------------------
+.vscode/
+.history/
+*.code-workspace
+
+# ----------------------------
+# Python cache and compiled files
+# ----------------------------
 __pycache__/
 *.pyc
-.env
-node_modules/
-.DS_Store
+*.pyo
+*.pyd
+*.pkl
+*.log
+
+# ----------------------------
+# Virtual environments
+# ----------------------------
+venv/
+.venv/
+env/
+ENV/
+*.env
+
+# ----------------------------
+# Jupyter (if you ever use it)
+# ----------------------------
+.ipynb_checkpoints/
+
+# ----------------------------
+# Data and models
+# ----------------------------
+#data/
+datasets/
+*.csv
+*.zip
+*.tar
+*.gz
+*.h5
+*.pt
+*.pth
+*.onnx
+*.joblib
+models/
+checkpoints/
+runs/
+
+# ----------------------------
+# Build / Distribution
+# ----------------------------
+build/
+dist/
+*.egg-info/
+.eggs/
+*.spec
+
+# ----------------------------
+# IDE / Editor
+# ----------------------------
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ----------------------------
+# Miscellaneous
+# ----------------------------
+*.bak
+*.tmp
+*.swp
+*.log
+*.out
+
+# ========================================
+# End of file
+# ========================================
