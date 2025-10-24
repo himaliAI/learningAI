@@ -1,0 +1,63 @@
+Numpy array dimensions:
+    Presented as a tuple: ()
+    0-D (scalar): () eg any scalar number, 5
+    1-D (vector): (n, ) eg a list of elements, [1,2,3,4] = (4,) 
+    2-D (Matrix): (rows, column), [[1, 2, 3], [4, 5, 6]]
+    3-D (Cube, stack of Matrix): (depth, rows, column), [[[1, 2], [3, 4]], [[5, 6], [7, 8]]]
+    N-D (N elements tuple)
+
+Get shape of array
+    myArray = np.array([1, 2, 3, 4, 5, 6])
+    myArray_shape = myArray.shape()
+    print(myArray_shape) # Output: (6,)
+
+Reshape array 
+    reshaped_myArray = myArray.reshape(2,3)
+    print(reshaped_myArray) # Output [[1,2 3,], [4, 5, 6]]
+
+while reshape, we can use -1 to automatically calculate its size on that dimension
+    arr = np.array([1, 2, 3, 4, 5, 6])
+    print(arr.reshape(2, -1)) # it gives array of size (2, 3)
+    print(arr.reshape(-1, 3)) # it gives array of size (2, 3)
+    # array with 8 elements can not be reshaped to (-1, 3)
+    
+.ndim returns the number of dimension of the array
+    arr_0d = np.array(5)
+    arr_1d = np.array([1, 2, 3, 4, 5, 6])
+    arr_2d = np.array([[1, 2, 3], [4, 5, 6]])
+    print(arr_0d.ndim) # Output 0
+    print(arr_1d.ndim) # Output 1
+    print(arr_2d.ndim) # Output 2
+
+.size returns the total number of elements in an array
+    arr_0d = np.array(5)
+    arr_1d = np.array([1, 2, 3, 4, 5, 6])
+    print(arr_0d.size) # Output 1
+    print(arr_1d.size) # Output 6
+
+Data type of numpy array elements
+    unlike python's list, np array is homogeneous, i.e all elements of an array must be of same data type
+    .dtype returns datatype of the array
+
+Common np datatype
+    integers: int8, int16, int32, int64
+    float: float16, float32, float64
+    boolean: Ture, False
+    string: <U1, <U10 # Unicode string (number indicates max length)
+    note: 8 bit = 1 byte, 
+
+Specify data type in np array
+    arr = np.array([1, 2, 3], dtype=int64)
+
+Converting data type
+    .astype
+    int_arr = np.array([1, 2, 3, 4, 5])
+    float_array = int_arr.astype(np.float64) # [1. 2. 3. 4. 5.]
+    str_array = int_arr.astype(np.str) # ['1', '2', '3', '4', '5']
+    bool_array = int_arr.astype(np.bool) # [True, True, True, True, True] 0 = False, non-zero = True
+
+np array's vector operation (operates element-wise)
+    a = np.array([1, 2, 3])
+    b = np.array([10, 20, 30])
+    print(a + b) # Output [11, 22, 33]
+    print(a * b) # Output [10, 40, 90]

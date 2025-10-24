@@ -45,6 +45,8 @@ ENV/
 # ----------------------------
 #data/
 datasets/
+media/
+roadmaps/
 *.csv
 *.zip
 *.tar
