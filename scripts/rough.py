@@ -1,5 +1,7 @@
 import numpy as np
 
-arr = np.array([8, 88, 888], dtype=np.int64)
-print(arr.itemsize)
-print(arr.nbytes)
+M = np.arange(12).reshape(3,4)
+col = np.array([1,10,100]).reshape(3,1)
+print("M:\n", M)
+print("col:\n", col)
+print("M + col:\n", M + col)

@@ -1,0 +1,9 @@
+Broadcasting is NumPy's set of rules for applying element-wise operations on arrays of different shapes
+
+Broadcasting rules:
+    Broadcasting is possible if following three rules are compatible
+    Rule 1: redundent, no need (read array dimensions from right to left)
+    Rule 2: If two arrays are of same dimensions, check each dimension pairs. They must be equal or one of them must be one to be compatible
+    Rule 3: If two arrays are of different dimensions, make the dimensions equal by prepending 1s (as required) to the smaller array. Then apply rule 2.
+    eg1: A = (2,3), B = (3,). Make B = (1,3) by prepending 1. Now compare 2,3 vs 1,3. As per rule 2, 3 equal 3 and, among 2 and 1 one is 1. Hence compatible
+    eg2: A = (2,3,4), B = (2,4). Make B = (1,2,4). compare 2 vs 1 -> compatible, 3 vs 2 -> not compatible. Hence not compatible
