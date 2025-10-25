@@ -1,0 +1,50 @@
+Numpy Random Numbers:
+    1. Creating Numpy Random Number Generator (RNG)
+        rng = np.random.default_rng(seed=42) # seed for reproducibility, no seed for different random numbers each time
+        rng2 = np.random.default_rng(seed=42) # use rng and rng2 to generate random numbers and they are identical under same conditions
+
+    2. Generating random floats (0 < 1)
+        ranNumber = rng.random() # returns one random number between 0 and 1
+        ranNumbers = rng.random(5) # returns a list of 5 similar randdom numbers
+        ranMatrix = rng.random((2, 3)) # returns a matrix of 2 x 3 containing randdom Numbers
+
+    3. Generating random integers
+        ranInteger = rng.integers(10) # random integer from 0 to 9 (10 is excluded)
+        ranIntegers = rng.ntegers(11, 21) # random integer from 11 to 20
+        ranIntegers = rng.integers(1, 101, 10) # 10 random numbers from 1 to 100
+        ranMatrix = rng.integers(1, 101, (3, 4)) # a 3 x 4 matrix of random numbers from 1 t0 100
+
+    4. Common distributions
+        Unifrom distribution (all outcome are equally likely, two types: discrete and contituous)
+            ranUniform = rng.Unifrom(1, 100, 10) # 10 float numbers from 1 to 100 with equal probability
+        Normal distribution (most values cluster around the mean/center)
+            ranNormal = rng.normal(0, 1, 10) # mean = 0, SD = 1 i.e. standard normal, 10 float numbers 
+            ranNormal = rng.normal(50, 10, 10) # mean 50, SD 10, 10 random floats 
+        Binomial distribution (only two outcomes, success or failure)
+            ranBinomial = rng.binomial(1, 0.5, 10) # 1 coin/die, 0.5 probability of success/head, 10 times - gives a list of 10
+            ranBinomial = rng.binomial(6, 1/6, 100) # 6 dies, probability of 1/6, 100 throws - gives a list of 100
+        Choice from a list eg colors = ['red', 'green', 'blue', 'yellow']
+            ranColor = rng.choice(colors, 10) # 10 simple random colors with replacement from color list/array
+            ranColorNoReplacement = rng.choice(colors, 10, replace=False) # without replacement; it will throw error as total number of item is 4 and we want 10 without replacement
+            weighted sampling with weights = [0.25, 0.25, 0.25, 0.25]
+                weighted_sample = rng.choice(colors, 10, p=weights) #can customize weight for each item; total weight should be 1
+
+Permutations and Shuffling:
+    rng = np.random.default_rng()
+    arr = np.array([i for i in range(1, 11)])
+    permuted = rng.permuation(arr) # permutes/shuffles the list/array and return to a new variable; original unchanged
+    rng.shuffle(arr) # shuffles the arr array in place (edits original array)
+
+Boolean masking and indexing:
+    rng = np.random.default_rng()
+    x = rng.integers(1, 11, 10)
+    mask = x > 5
+    greaterThanFive = x[mask]
+
+    or simply:
+    greaterThanFive = x[x > 5]
+
+    # Replace negatives with zero
+    x2 = x.copy()
+    x2[x2 < 0] = 0
+    print("Processed x2:", x2)

@@ -1,7 +1,14 @@
 import numpy as np
 
-M = np.arange(12).reshape(3,4)
-col = np.array([1,10,100]).reshape(3,1)
-print("M:\n", M)
-print("col:\n", col)
-print("M + col:\n", M + col)
+rng = np.random.default_rng()
+x = np.random.randn(1_000_00000)
+
+# Vectorized sum of squares
+sum_vec = (x**2).sum()
+print("Vectorized sum:", sum_vec)
+
+# Loop version (may take time for large arrays)
+s = 0.0
+for v in x:
+    s += v*v
+print("Loop sum:", s)
