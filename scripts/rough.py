@@ -1,14 +1,11 @@
 import numpy as np
 
-rng = np.random.default_rng()
-x = np.random.randn(1_000_00000)
+A = np.array([[1, 2, 3],
+              [4, 5, 6],
+              [7, 8, 9]])
+B = np.array([[1, 2, 3],
+              [2, 3, 1],
+              [3, 1, 2]])
 
-# Vectorized sum of squares
-sum_vec = (x**2).sum()
-print("Vectorized sum:", sum_vec)
-
-# Loop version (may take time for large arrays)
-s = 0.0
-for v in x:
-    s += v*v
-print("Loop sum:", s)
+dot = np.dot(A, B) #
+print(dot)
