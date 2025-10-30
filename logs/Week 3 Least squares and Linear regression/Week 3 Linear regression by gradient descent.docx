@@ -1,0 +1,22 @@
+Linear regression by gradient descent
+
+we need to find cost function of theta (J(θ)) such that it is high initially with a very small theta (zero or close to zero)
+Then, we will update θ in a very small step until there is hardly any change in J(θ).
+This is the θ we are looking for.
+
+J(θ) = (1/2m)(y - Xθ)^T(y - Xθ)
+
+J(θ) pythonic code representation:
+cost = (1/(2*m)) * np.sum(error ** 2) # error is a vector, y_pred - y, a difference of two vectors 
+
+θ update rule: θ = θ - alpha.1/m.X^T(Xθ - y)
+
+Suggestion roadmap:
+
+now do Linear Regression using scikit-learn, Then:
+Step	Topic	                        Why
+1	    Linear Regression	            You’ve mastered it 🎯
+2	    Multiple Linear Regression	    Add more features
+3	    Polynomial Regression	        Model non-linear data
+4	    Regularization (Ridge, Lasso)	Prevent overfitting
+5	    Logistic Regression	For classification problems
