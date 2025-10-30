@@ -1,0 +1,66 @@
+Linear regression Model:
+    # model
+    y = w0x0 + w1x1 + w2x2 + .... + wmxm (where x0 = 1, y = target/output, x are variables/features)
+        As x0 = 1, first expression becomes w0 which is normally presented as b (the intercept)
+        The rest w (w1  w2  ....    wn) are weights/parameters/coefficient
+
+
+    # about variables/features (input/feature matrix)
+    all x for all samples can be arranged in a matrix called input (feature) matrix, 
+    X = [[1 x11 x12 x13 ......... x1m], # x00 = 1; m+1 elements of first sample
+            [1 x21 x22 x23 ......... x2m],
+            '''
+            '''
+            [1 xn1 xn2 xn3 ......... xnm]
+        ]
+    Hence, X is a (n, m+1) matrix
+
+    # about parameter/ weight/ coefficient vector
+    Denoted by θ (theta)
+    It is a vector of size (m+1, 1), or column vector, and contains all weights (intercepts and slopes)
+    So,  = [b
+             w1
+             w2
+             ..
+             ..
+             wm]
+
+    # vector representation of Linear regression model/equation
+    y = w0x0 + w1x1 + w2x2 + ...... + wmxm
+    or Y = X.θ # Y matrix/vector, X matrix/vector, θ matrix/vector 
+    and Ȳ (Y hat matrix/vector, or predicted Y, ȳ for single predicted y)
+
+The real problem:
+    In high school maths, they give us equation
+    y = mx + c # m = slope (equivalent to weight/parameter/coefficient), b = incercept (equivalent to w0)
+
+    Here, they give us data points (x, y) # in fact a lot of data points
+        Our job is to find m and c equivalents to find an equation (i.e the parameter/weight/coefficient Matrix θ)
+        The equation should be such that the difference in the real y and predicted y should be as low as possible (ideally zero)
+            i.e minimize the sum of squared errors 
+    
+    # calculate theta minimizing the sum of squared errors
+    MSE = 1/N(X.w - y)^2 # MSE = Mean squared error, N is sample size
+
+    sum of squared errors is denoted by J(theta) i.e cost function of theta
+    J(theta) = sum of squared errors = sigma(y - ȳ)^2 = sigma(y - Xθ)^2
+    J(theta) = (y−Xθ)^T @ (y−Xθ) # vector form
+
+    To mminimize SSE (sum of squared errors),
+    we need to take derivative of j(θ) wrt θ, i.e dJ/dθ
+    Ultimately we get:
+
+        θ = (X^T @ X)^−1 @ (X^T @ y)  # (XTX)−1 XTy to remember
+        # pythonic code
+        theta = np.linalg.inv(X.T @ X) @ (X.T @ y)
+            where, X.T = transpose of x
+                   
+Some pythonic plotting codes:
+    import matplotlib.pyplot as plt 
+    plt.scatter(X, Y, color='green/red', legend='data points') # scatter plot 
+    plt.plot(same as above) # line diagram
+    plt.xlabel('X1') # label along x axis
+    plt.ylabel('Residuals') # label along y axis
+    plt.title('Residual Plot') # title of diagram
+    plt.legend() # show legend
+    plt.show() # show plot

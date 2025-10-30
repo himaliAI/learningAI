@@ -1,11 +1,10 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
-A = np.array([[1, 2, 3],
-              [4, 5, 6],
-              [7, 8, 9]])
-B = np.array([[1, 2, 3],
-              [2, 3, 1],
-              [3, 1, 2]])
-
-dot = np.dot(A, B) #
-print(dot)
+X = 
+plt.scatter(X, y, color='red', label='Data Points')
+plt.legend()
+plt.xlabel('X values')
+plt.ylabel('Y values')
+plt.title('Training Data')
+plt.show()
