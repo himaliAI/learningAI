@@ -1,0 +1,22 @@
+Linear regression with scikit-learn
+
+scikit-learn (often written as sklearn) is a popular Python library for Machine Learning.
+It provides ready-made functions for:
+    Regression (predicting continuous values)
+    Classification (predicting categories)
+    Clustering (grouping similar data)
+    Data preprocessing (scaling, splitting, etc.)
+In Linear Regression, scikit-learn does all the math we learned manually — it finds the best-fitting line (that minimizes cost) automatically.
+
+# Training the model (means find Theta [b and w1, w2, w3, .... wm])
+X -> size(100, 1) # 100 samples, 1 feature
+y = 2.5 * X + 1.5 + noise # size (100, 1)
+
+model = LinearRegression() # creates object
+model.fit(X, y) # train the model to find intercept_ and coef_
+print(f"Intercept (b) = {model.intercept_}")
+print(f"Coefficient (w): {model.coef_}")
+
+# Predict with the trained model 
+use the b and w (or multiple ws) above to predict y
+y = model.predict(x)
