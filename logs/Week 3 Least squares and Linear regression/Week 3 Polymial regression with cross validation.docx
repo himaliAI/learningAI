@@ -1,0 +1,39 @@
+We use polynominal regression when the function is not linear
+    eg, quadratic equation
+
+Form:
+    y = b + w1x + w2x^2 + w3x^3 + ..... + wnx^n # n is the degree
+
+What we basically do?
+    For given x,
+    first we calculate x, x^2, x^3, ......, x^n 
+    Then we apply linear regression with:
+        x as x1
+        x^2 as x2
+        x^3 as x3 and so on
+    In short:
+        we transform x to various degrees
+        then use those x to perform linear regression
+
+What are the concerns?
+    1. If we use lesser degrees than optimum,
+        it will be a under-fitting curve.
+        Means, it does not fit the data properly
+    2. If we use higher degrees than optimum,
+        it will be over-fitting curve.
+        Means, it tries to fit most of the curve but,
+            it is due to memory and prediction will be poor.
+        There will be a wavy curve.
+
+How do we address our concerns?
+    1. We consider up to a high degree, for eg let's say 10
+    2. For each degree, we calculate R^2. 
+    3. R² score represents the proportion of variance in the target variable that is predictable from the features
+        Or, simply, R^2 of 0.85 indicate that 85% of the variance in y can be explained by our model
+    4. While calculating R^2, we divide our data into 5 bins (cv=5)
+        each bin calculates R^2, thus there are 5 R^2
+        We calculate mean of R^2 for that degree 
+    5. We consider a degree as optimum whose R^2 is highest.
+
+Advanced topic: 
+    We will revisit later.
