@@ -1,0 +1,3 @@
+It is a standard practice to split data into:
+    80% training data and 20% test data
+    Then test accuracy of trained model to predicted values
