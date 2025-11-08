@@ -1,0 +1,50 @@
+Logistic regression predicts categories, eg:
+    yes/no,
+    spam/not spam,
+    disease/ not disease etc
+
+In linear regression, we had:
+    y = Xθ
+
+But, in logistic regression, we can have values between 0 and 1
+    So, we pass this value of Xθ through a function called Sigmoid function or Logistic function
+
+    S(y) = 1 / (1 + np.exp(-Xθ))
+
+y = 1 if value >= 0.5
+y = 0 if value < 0.5
+
+There is no simple formula for logistic regression as there was one for linear regression.
+So, we use gradient descent and sklearn methods.
+
+Total cost:
+    J(θ) = -(1/m) * np.sum(y * np.log(h + epsilon) + (1 - y) * np.log(1 - h + epsilon))
+        where:
+        m = sample size
+        y = (m, 1) matrix of 0 and 1
+        h = sigmoid function of X @ θ ### 1 / (1 + np.exp(-z)) where z = X @ θ
+        epsilon = a very small number eg 1e-5 (0.00001) to prevent log(0) when h = 0
+        log is natural logarithm i.e. log to the base e ~ 2.718
+
+    Derivation of cost:
+        prediction = h = sigmoid(X @ theta)
+
+        cost_when_1 = -np.log(prediction)       # y = 1
+        cost_when_0 = -np.log(1 - prediction)   # y = 0
+
+        # combine both cost for a sample
+        cost_per_sample = y * cost_when_1 + (1 - y) * cost_when_0
+
+        # we add epsilon to prediction to prevent log(0) error which is equivalent to -inf 
+        
+        # Average cost for m samples with epsilon
+        cost = -(1/m) * np.sum(y * np.log(prediction + epsilon) + (1 - y) * np.log(1 - prediction + epsilon))
+
+Gradient descent:
+    Initially we take all thetas as zero.
+    We calculate the cost.
+    We calculate gradient which is derivative of cost.
+    Initially, the gradient is negative which indicates the cost is gradually decreasing
+    When, gradient is almost 0, there is no change in gradient. This indicates minimum cost.
+    We take this theta as it correponds to minimum cost.
+    
