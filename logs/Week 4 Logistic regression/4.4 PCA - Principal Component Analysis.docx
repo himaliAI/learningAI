@@ -1,0 +1,13 @@
+PCA (Principal Component Analysis) is a technique in ML and AI to
+    reduce dimensionality of data wile preserving as much variance (information) as possible
+
+    It transforms original features to a new set of features called Prinicpal Components
+    These Principal Components are uncorrelated and ordered by the amount of variance they capture
+
+Why use PCA?
+    1. To simplify complex datasets
+    2. To visualize high-dimensional data
+    3. To speed up learning algorithms
+    4. To remove noise and redundancy
+
+PCA is basically a preprosessing step in ML
