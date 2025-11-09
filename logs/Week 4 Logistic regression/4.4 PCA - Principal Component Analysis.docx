@@ -11,3 +11,13 @@ Why use PCA?
     4. To remove noise and redundancy
 
 PCA is basically a preprosessing step in ML
+
+How to decide number of components to consider
+    Each principal component has an eigenvalue (variance it explains)
+    Explained variance ratio tells us the fraction of total variance captured by each component
+    Decision rule: Keep enough components so that the cumulative explained variance exceeds threshold (90 - 95%)
+
+    Cross validaton (Practical ML Approach)
+        Train your model with different numbers of components
+        Compare performance (accuracy, error, etc)
+        Choose the smallest number of compoenents that gives good performance
