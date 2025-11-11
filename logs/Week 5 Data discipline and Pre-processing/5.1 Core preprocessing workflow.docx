@@ -1,0 +1,12 @@
+Core preprocessing workflow steps:
+    Dataset loading (In our example, we have loaded from openml)
+
+    Column identification (Identify columns with numerical vs categorical values)
+
+    Pipelines for numeric/categorical preprocessing (define a collection of actions for preprocessing data (impute, scale/onehot) inside one pipeline)
+
+    Train-test split (split original data to training data (80% in our case) and test data(20%))
+
+    Fit/transform with discipline (Apply preprocessing pipelines to training data and test data separately)
+
+    Full pipeline with model (new pipelines with preprocessing + modelling; fit on training data, evaluate on test data)

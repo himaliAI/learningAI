@@ -1,8 +1,8 @@
-from sklearn.datasets import fetch_openml
+from sklearn.datasets import fetch_openml # openml is a data repository site
 import pandas as pd
 
 # Load titanic dataset
-titanic = fetch_openml('titanic', version=1, as_frame=True)
+titanic = fetch_openml('titanic', version=1, as_frame=True) # there are multiple version of 'Titanic' data; as_frame=True means DataFrame
 
 # Extract features X and target y
 X = titanic.data
