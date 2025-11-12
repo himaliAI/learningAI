@@ -1,0 +1,9 @@
+Time based splits
+    First we split the given data to first 80% as train data
+        and remaining 20% for test data
+    
+    Then, we apply preprocessing pipeline
+    Next, wa apply final pipeline (including model)
+
+    We will train the model in training data
+    Then, predict in test data using the learned parameters during training

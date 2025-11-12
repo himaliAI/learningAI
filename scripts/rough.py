@@ -1,70 +1,54 @@
-from sklearn.datasets import fetch_openml
+from sklearn.datasets import fetch_california_housing
 import pandas as pd
 
-# Load titanic dataset
-titanic = fetch_openml('titanic', version=1, as_frame=True)
+data = fetch_california_housing(as_frame=True)
 
 # Extract features X and target y
-X = titanic.data
-y = titanic.target
+X = data.data
+y = data.target
 
-num_cols = X.select_dtypes(include=['int64', 'float64']).columns.tolist()
-cat_cols = X.select_dtypes(include=['object', 'category']).columns.tolist()
+# All colums in X are float64, i.e numericals
+num_cols = X.select_dtypes(include=['float64']).columns.tolist()
 
-cat_cols.append('pclass')
-num_cols.remove('pclass')
-
-# Build numerical and categoricla pipelines
+# Build numerical pipeline
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 
 # Numeric pipeline
-num_pipe = Pipeline([
-    ('impute', SimpleImputer(strategy='mean')), # fill missing numeric values with mean
-    ('scale', StandardScaler()) # standardize (zero mean, unit variance)
+num_pipeline = Pipeline([
+    ('impute', SimpleImputer(strategy='mean')),
+    ('scale', StandardScaler())
 ])
 
-# Categorical pipeline
-cat_pipe = Pipeline([
-    ('impute', SimpleImputer(strategy='most_frequent')), # fill missing categorical values with most frequent value
-    ('onehot', OneHotEncoder(handle_unknown='ignore'))   # convert categories to one-hot (binary columns) vectors
-])
+# As all data are numerical we do not need cat_pipeline and we do not need to combine them
 
-# Combine into single preprocessor
-preprocessor = ColumnTransformer([ 
-    ('num', num_pipe, num_cols),
-    ('cat', cat_pipe, cat_cols) # applies right pipeline to the right set of columns
-])
-
-# Train-test split
+# train test split (80% training data, 20% testing data)
 from sklearn.model_selection import train_test_split
 
-# split data: 80% train, 20% test
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
-) # random_state=42 ensures reproducibility, stratify=y keeps class balance consistent between train and test
+    X, y, test_size=0.2, random_state=42
+)
 
-# Fit and Transform with Preprocessor
-# Fit the Preprocessor on training data only
-X_train_processed = preprocessor.fit_transform(X_train) # imputation, scaling, and one-hot encoding in training data
+# Fit preprocessor in training data
+X_train_processed = num_pipeline.fit_transform(X_train)
 
-# Transform test data using same fitted preprocessor
-X_test_processed = preprocessor.transform(X_test) # applies same learned rules to test data
+# transform test data using same learned paramenters
+X_test_processed = num_pipeline.transform(X_test)
 
-# Step 6: Build a Full Pipeline
-from sklearn.linear_model import LogisticRegression
+# build a full pipeline
+from sklearn.linear_model import LinearRegression
 
-# Full pipeline: preprocession + model
-clf_pipeline = Pipeline([
-    ('preprocess', preprocessor), # our numeric + categorical transformations
-    ('model', LogisticRegression(max_iter=1000)) # classifier
+full_pipeline = Pipeline([
+    ('preprocess', num_pipeline),
+    ('model', LinearRegression())
 ])
 
-# Fit on training data
-clf_pipeline.fit(X_train, y_train)
+# fit on training data
+full_pipeline.fit(X_train, y_train)
 
-# Evaluate on test data
-score = clf_pipeline.score(X_test, y_test)
-print(f"Test accuracy: {score}")
+# evaluate on test data
+score = full_pipeline.score(X_test, y_test)
+
+print(f"R^^2 score on test data: {score:.4f}")
