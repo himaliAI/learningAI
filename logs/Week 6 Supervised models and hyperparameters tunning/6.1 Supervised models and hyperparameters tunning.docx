@@ -1,0 +1,113 @@
+steps for baseline linear regression 
+    1. Setup - import needed libraries
+    2. load the required data and split them to X (parameters) and y (target)
+    3. Train/test split (20% test data)
+    4. Preprocessing pipeline
+    5. Full pipeline (Preprocessing + model)
+    6. Fit the training data to full pipeline
+    7. Evaluate the test data with the learned parameters from step 6
+    8. Keep note of R^2. We will need it to campare later
+
+Regularization with Ridge and Lasso
+    # Regularization is a technique used to prevent overfitting by adding a penalty to the model’s complexity
+    # Overfitting: When a model learns the training data too well, including noise, and fails to generalize to new data
+    # Alpha: controls the strength of penalty. Choosing alpha is about finding the sweet spot in the bias-variance tradeoff
+    # max_iter: ensures the algorithm has enough time to find the optimal coefficients
+        If convergence warnings appears, increase max_iter to 5000 to 20000
+
+# Ridge and Lasso are regularized versions of linear regression designed to control model complexity,
+    improve generalization, and handle multicollinearity. 
+    Both add a penalty to the loss function that discourages large coefficients.
+
+# Ridge: shrinks coefficients; helps when features are correlated
+    Its parameter, α alpha, controls the strength of regularization
+        small α = behavior close to linear equation
+        medium α (0.1 - 10) = coefficients shrink towards zero
+            Balanced bais-variance; often best generalization
+        Large alpha (100+) = Heavy shrinkage
+            High bias, lower variance; risk of underfitting
+
+# Lasso: can zero-out coefficients; useful for feature selection
+    small alpha (1e-4 to 1e-3): mild shrinkage, good when you suspect most features matter
+    moderate alpha (1e-3 to 1e-1): More coefficients set to zero; better in correlated or noisy features
+    Large alpha (>= 1.0): Many coefficient become zero -> risk of underfitting
+    
+    max_iter: if you see convergence warnings, increase max_iter to 5000-20000
+
+    1. Ridge pipeline as Full pipeline
+    2. Fit 
+    3. Evaluate
+
+    1. Lasso pipeline as Full pipeline
+    2. Fit
+    3. Evaluate
+
+Decision trees, Random Forest, and Gradient Boosting
+# They are different models like Ridge and Lasso
+
+# Decision Trees split data into regions to reduce impurity and capture nonlinearities
+    max_depth: maximum depth of tree
+        small max_depth: simple tree (high bias and low variance)
+        large max_depth: complex tree (low bias, high variance), risk of over fitting
+        None -> trees grow fully
+
+# Random Forests builds many Decision Trees and averages their predicitons
+    It reduce variance, and also decorrelates the correlated data
+    n_estimators: number of trees in the Forest
+        typical 100 - 500
+
+# Gradient Boosting: build trees sequentially
+    Each new tree corrects the errors of the previous ones
+    Random forest => parallel averaging; Gradient Boosting => additive
+    Very powerful but sensitive to hyperparameters
+    # n_estimators: as in Random Forest
+    # learning_rate: shrinks contribution of each tree
+        small (0.01 - 0.1): slow learning, better generalization
+        large (>0.3): faster learning, risk of overfitting
+
+SVMs (Support Vector Machines) and its regression SVR:
+    Finds best boundary (hyperplane) that seperates classes (classification) or fits data (regression)
+    sensitive to scaling -> always standardize features
+    
+    C (regularization parameter): small C => high bias, low variance
+        large C => low bias, higer variance (risk of overfitting) 
+    gamma: controls influence of individual training points
+        small gamma => smooth boundary (high bias)
+        large gamma => complex boundary that fits closely (low bias, high variance)
+    
+k-NN (k-Neareast Neighbors)
+    a lazy learner, does not build a model during traiining
+    to predict, it looks at the k closest points in te training set
+    sensitive to scaling -> always standardize features
+    
+    Classification: majority vote among Neighbors
+    regression: average of neighbors' values
+    # n-neighbors (k): numbers of neighbors
+        small (3): low bias, high variance
+        large (eg 20): smoother predictions, high bias, low variance
+
+hyperparameters tunning with GridSearchCV:
+    # Parameters are values leraned by the model during training 
+        eg: coefficients in linear regression, weights in neural networks
+    # hyperparameters are values set before training that control how the model learns or how complx it can become
+        eg: In Ridge/Lasso, alpha is hyperparameter 
+        eg: in Decision Trees, max_depth is hyperparameter
+        eg: in Random Forests, n_estimators is a hyperparameter
+    # hyperparameters tunning is the process of searching for the best combination of hyperparameters that gives the model the highest performance on unseen data
+        tunning finds the sweet spot in the bias-variance tradeoff
+        Can be done manually (simple but inefficient), or by
+            Grid Search (GridSearchCV) method, or Random Search (RandomizedSearchCV)
+    
+    # GridSearchCV:
+        Define a grid of possible hyperparameter values
+        Train and Evaluate the model for every combination
+        Exhaustive but can be slow
+        One can set hyperparameters as follows:
+            param_grid = {
+                'model__n_estimators': [200, 400],
+                'model__max_depth': [None, 10, 20],
+                'model__min_samples_split': [2, 5],
+                'model__max_features': ['sqrt', 'log2', None]
+            }
+        And apply to the GridSearchCV by:
+            search = GridSearchCV(rf_gs_pipeline, param_grid, cv=3, n_jobs=-1)
