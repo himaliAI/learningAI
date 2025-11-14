@@ -1,0 +1,65 @@
+Regression Metrices
+    1. R^2 (Coefficient of Determination)
+        Measures proportion of variance explained by the model
+        Range -inf to 1
+        1 = perfect fit, 0 = no better than mean, negative = worse than mean
+        Good for overall explanatory power
+        Can be misleading if data not linear
+
+    2. RMSE (Root Mean squared error)
+        [(1/n)Sigma(y - y1)^2]^0.5
+        penalize large errors more strongly
+        same unit as target variable
+
+    3. MAE (Mean Absolute Error)
+        (1/n)Sigma(absolute(y - y1))
+        treats all error equally
+        more robust to outliers than RMSE
+
+    Rule of thumb:
+    1. Use R^2 for explanatory data
+    2. Use RMSE when large errors matter
+    3. Use MAE when robustness to outliers matters
+
+Classification Metrices
+    1. Accuracy: fraction of correct predictions
+        misleading in imbalanced datasets
+
+    2. Precision: True positive / Total positive (total = True positive + False positive)
+        How many are correct out of predicted positives?
+        Important when false positive are costly (eg cancer diagnosis)
+
+    3. Sensitivity (Recall): TP / (TP + FN)
+        Of Actual positives, how many did we catch?
+        Important when false negatives are costly (eg missing a disease case) 
+
+    4. F1 score: 2 * Precision * Recall / (precision + Recall)
+        Harmonic mean of Precision and Recall
+        Balances both, useful when classes are imbalanced
+
+    5. Confusing Matrix:
+        Table showing TP, FP, TN, FN
+        Helps visualize misclassifications
+
+    6. ROC-AUC (Reveiver Operating Characteristic - Area Under Curve)
+        Plots True Positive Rate Vs False Positive Rate at different threshold
+        Good for balanced datasets
+
+    7. PR-AUC (Precision-Recall Area Under Curve)
+        plots Precision Vs Recall at different threshold
+        more informative for highly imbalanced datasets
+        Focuses on how well the model identifies positives
+
+Cross-Validation
+    1. cross_val_score: 
+        Evaluates model on multiple folds of data
+        More reliable than a single train/test split
+
+    2. StratifiedKFold:
+        Ensures each fold has the same class distribution
+        Important for classification with imbalanced data
+
+    3. TimeSeriesSplit:
+        Splits sequentially (train on past, test on future)
+        Critical for time series forecasting
+
