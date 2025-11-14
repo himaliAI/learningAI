@@ -1,3 +1,4 @@
+# Same as in 7.1 up to line 102
 # Step 1: import libraries and dataset
 import pandas as pd
 import numpy as np
@@ -99,3 +100,36 @@ for name, model in models.items():
     if roc is not None:
         print(f"ROC-AUC: {roc:.4f}")
     print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+
+# week 7.2 starts from here
+import matplotlib.pyplot as plt
+from sklearn.metrics import ConfusionMatrixDisplay, RocCurveDisplay
+
+# Confusion matrix visualization
+y_pred = clf_pipeline.predict(X_test)
+conf_matrx = confusion_matrix(y_test, y_pred)
+
+# plot heatmap
+plt.figure(figsize=(6,4))
+sns.heatmap(conf_matrx, annot=True, fmt="d", cmap="Blues", xticklabels=["Not Survived","Survived"], yticklabels=["Not Survived","Survived"])
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.title("Confusion Matrix - Random Forest")
+plt.show()
+
+# ROC Curve visualization
+# predicted probabilities
+y_proba = clf_pipeline.predict_proba(X_test)[:,1]
+
+# plot ROC curve
+RocCurveDisplay.from_predictions(y_test, y_proba)
+plt.title("ROC Curve - Random Forest")
+plt.show()
+
+# Precision-Recall Curve
+from sklearn.metrics import PrecisionRecallDisplay
+
+y_proba = clf_pipeline.predict_proba(X_test)[:,1]
+PrecisionRecallDisplay.from_predictions(y_test, y_proba)
+plt.title("Precision-Recall Curve - Random Forest")
+plt.show()
