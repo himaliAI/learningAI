@@ -1,0 +1,48 @@
+Feature Engineering:
+    Feature Engineering is the process of creating, transforming, or selecting 
+    input variables (features) to improve a machine learning model’s performance
+
+    Good features = better generalization, higher accuracy, and more interpretable models
+
+    Advantages:
+        1. Boosts accuracy
+        2. Reduce overfitting
+        3. Improves interpretability
+        4. Domain knowledge: Incorporating human understanding of the problem into the model
+
+Common Feature Engineering techniques:
+    1. Transformations:
+        Apply mathematical functions to stabilize distribution or highlight relationships
+            eg: log(fare) to reduce skew
+            eg: age^2 if squared age has predictive power
+    
+    2. Binning / Discretization:
+        Convert continuous variables into categories
+            eg: Age groups (child, teenager, adult, senior)
+            eg: Income (low, medium, high)
+
+    3. Interaction features:
+        Combine two or more features to capture relationships
+            eg: sibsp + parch -> family size 
+            eg: sex * pclass  -> survival odds differ by gender and class
+
+    4. Encoding categorical variables:
+        Convert categories into numbers the model can use:
+            eg: One-hot encoding: creates binary columns for each category
+            eg: Target encoding: replaces category with average target value
+            eg: Frequency encoding: replaces category with its Frequency
+
+    5. Handling missing Data:
+        Impute missing values with mean, median, mode, or a special category
+        Sometimes missingness itself is informative (eg 'unknown' category)
+
+    6. Scaliing:
+        Standardize or normalize numerical features so they're comparable
+        Essential for models sensitive to scale (SVM, k-NN, Logistic Regression)
+
+    7. Feature Selection
+        Remove irrelevant or redundant features
+        
+        Methods: correlation analysis, Lasso (L1), tree-based importance, permutation importance
+
+    
