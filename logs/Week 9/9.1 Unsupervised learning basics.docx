@@ -1,0 +1,11 @@
+Unsupervised learning is about finding patterns in data without labelled outcomes
+    i.e. no target variable
+
+Common goals of Unsupervised learning:
+    Clustering: group similar data points (eg k-means)
+    Dimensionality reduction: simplify data while preserving structure (eg PCA)
+    Anomaly detection: flag unusual data points (eg, isolation Forest)
+
+Summarize cluster profiles:
+    Understand what each cluster represents in terms of original features
+    Translate PCA + k-means results back to real-world traits (eg, alcohol level, acidity, color intensity)
