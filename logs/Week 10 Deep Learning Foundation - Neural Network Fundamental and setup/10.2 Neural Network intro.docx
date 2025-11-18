@@ -1,0 +1,42 @@
+What is neural network?
+    A fuction approximator
+    It learns to map inputs to outputs by
+        adjusting parameters (weights and biases)
+
+Core architecture of NN:
+    1. Input layer: Raw features (age, BP, etc)
+    2. Linear transformation:
+        z = W.x + b # (W = weights, b = bias)
+    3. Activation function:
+        Adds non-linearity (ReLU, sigmoid, softmax)
+    4. Output layer: Prediction (regression value or classification probability)
+
+Why Activations?
+    It allows network to learn curves, boundaries, and complex pattern
+    If we stack only linear layers, they collapse into one linear mapping. So, we need activation for non-linearity
+    
+what is Forward Pass (Intuition)?
+    Data flows forward:
+        input -> linear -> activation -> output 
+
+What is Backward Pass (Intuition)?
+    Loss is computed (difference between prediction and target)
+    Gradients flow backward through the network using chain rule
+    Optimizer updates weights to reduce loss
+
+Sigmoid function:
+    S(z) = 1 / (1 + torch.exp(-z)) # use of formula
+    or,
+    S(z) = torch.sigmoid(z) # built in torch sigmoid function
+    It squashes values into the range of (0, 1)
+    Useful for binary classification or probability-like outputs
+
+ReLU: (Rectified Linear Unit)
+    relu_torch = torch.relu(z)
+    outputs z if positive, else 0
+    Use: hidden layers for efficient training
+
+Softmax:
+    Converts raw scores (logits) into a probability distribution
+    Each output is between 0 and 1, and they sum to 1
+    Used in multi-class classification
