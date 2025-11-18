@@ -1,0 +1,11 @@
+Miniconda3 setup done with PyTorch and TensorFlow
+
+Tensor: generalization of vectors and matrices
+    Scalar -> 0D tensor (single number)
+    Vector -> 1D tensor
+    Matrix -> 2D tensor
+    Higher-order tensors -> 3D, 4D, ... (used for images, batches etc)
+
+PyTorch makes use of GPU device with .to(device)
+    GPU accelerates processing massively
+

@@ -41,12 +41,13 @@ ENV/
 .ipynb_checkpoints/
 
 # ----------------------------
-# Data and models
+# Data and models and other folders
 # ----------------------------
 #data/
 datasets/
 media/
 roadmaps/
+learning_materials/
 *.csv
 *.zip
 *.tar
@@ -59,6 +60,7 @@ roadmaps/
 models/
 checkpoints/
 runs/
+temp/
 
 # ----------------------------
 # Build / Distribution
