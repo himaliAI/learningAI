@@ -1,0 +1,26 @@
+Optimizers:
+    After we compute the loss, we need to adjust the model's weights to reduce it 
+    Optimizers are algorithms that decide how much and in which direction to change each weight 
+    They use the gradients (from backpropagation) as a guide
+    They are the "learning engine" of the network 
+
+Core Optimizers:
+    1. Stochastic Gradient Descent (SGD)
+        Update rule: w <- w - learning_rate.(dL/dw)
+        Stochastic means: we update weights using small batches of data, not the whole dataset at once
+        Pros: simple, widely used, works well with careful tunning
+        Cons: Can be slow, sensitive to learning_rate, may get stuck in local minima
+
+    2. Momentum (SGD with Momentum):
+        Adds a "memory" of past gradients
+        Prevents oscillations and speeds up convergence
+        It is like a ball rolling downhill - it builds speed in the right direction
+
+    3. Adam (Adaptive Moment Estimation):
+        Combines ideas of Momentum and adaptive learning rates
+        Keep track of:
+            First moment (mean of gradients) -> like Momentum
+            Second moment (variance of gradients) -> scales updates differently for each parameter
+        Pros: Fast, stable, requires less tunning
+        Cons: Sometimes overfits or generalizes worse than SGD in certain tasks
+
