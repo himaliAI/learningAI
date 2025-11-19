@@ -1,0 +1,30 @@
+Loss function in Neural Networks:
+
+Why do we need loss functions?
+    A neural network makes predictions, but we need a way to measure how wrong
+        those predictions are compared to true output/labels.
+    That measure is the loss function
+    So, loss is the difference between prediction and target
+
+    Training = minimizing loss by adjusting weights via gradient descent
+
+Two core loss Functions:
+    1. Mean Squared Errors (MSE)
+        J(theta) = (1/n)Summation of (y - y_pred)^2
+        Use case: Linear regression
+        Intuition: Penalizes large errors more strongly (squared term)
+
+    2. Cross-Entropy Loss
+        L (binary) = [y.log(y_pred) + (1 - y).log(1-y_pred)]
+        L (multi-class) = - Sigma y.log(y_pred)
+        Use case: Classification (binary or multi-class)
+        Intuition: Measure the "distance" between true distribution and predicted distribution
+
+Connection to Activations:
+    1. Regression -> MSE + Linear output
+    2. Binary classification -> Cross-entropy + Sigmoid
+    3. Multi-class classification -> Cross-entropy + Softmax
+
+Why not use MSE for classification?
+    MSE works but is inefficient -> weak and slow
+    Cross-entropy -> faster and more stable training 
