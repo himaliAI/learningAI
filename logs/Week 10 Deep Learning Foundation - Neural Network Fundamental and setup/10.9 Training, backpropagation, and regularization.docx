@@ -1,0 +1,103 @@
+Forward pass:
+    Process of sending input data through network to get predictionss
+    Each layer applies a transformation
+        Linear transformation: z = Wx + b
+        Activation function: adds non-linearity (ReLU, Sigmoid, softmax)
+    ### model(x) does it all
+
+Backpropagation:
+    This is how network learns
+    steps:
+        1. compute loss (prediction - true label)
+        2. Use chain rule to calculate gradients (derivative) of loss w.r.t each weight
+        3. Store gradients in .grad attributes of parameters
+        4. Optimizer updates weights using these gradients
+
+        loss.backward() # compute gradients
+        optimizer.step() # updates weights
+        optimizer.zero_grad() # clears old gradients
+
+Optimizers:
+    1. SGD (simple gradient descent): fixed learning rate
+    2. Adam (Adaptive learning rate) + momentum, faster convergence
+
+    1. Learning rate: step size for updates. Too high -> unstable, too low -> slow
+    2. Batch size: number of samples per gradient update 
+        # small batch -> noisy but faster learning
+        # Large batch -> smoother but slower update
+
+Overfitting:
+    In this case, model learns training data so well, it fails to generalize 
+        It is like memorization
+    Training loss is low, but validation loss is high
+    Causes:
+        Too complex model
+        Too few trainig samples
+        Training too long
+
+Regularization techniques:
+    1. Dropout
+        Randomly turns-off neurons during training
+        Prevents co-adaptation, forces network to learn robust features
+        nn.Dropout(p=0.5)
+
+    2. Weight Decay (L2 Regularization)
+        Penalizes large weights
+        Keeps model simpler, reduces overfitting 
+        optim.Adam(........, weight_decay=1e-4)
+
+    3. Early Stopping
+        Stops training when validation loss stops improving
+        Prevents overfitting by halting before memorization
+        Espeically useful in medical imaging where trainig is expensive
+
+Hyperparameter search
+    Experiment with:
+        Learning rate (eg 0.001, 0.01, 0.1)
+        Batch size (eg 16, 32, 64)
+    Observe effects on convergence speed and stability
+    Often done with grid search or random search
+
+###
+Real-world example with MNIST digits. 
+    It’s simple enough to train quickly, but rich enough to demonstrate forward pass, backpropagation, optimizers, and regularization.
+
+    Step 1: What MNIST Looks Like
+        Input: 28×28 pixel images (actual handwritten digits, flattened to 784 features or kept as 2D for CNNs).
+        Output: 10 classes (digits 0–9).
+        Goal: Train a classifier that maps pixels → digit label.
+
+    Step 2: Forward Pass (MNIST)
+        Input image → flattened vector (784 features).
+        Linear layer → hidden representation.
+        Activation (ReLU).
+        Linear layer → logits for 10 classes.
+        Softmax → probabilities.
+            👉 In PyTorch, this is just model(x).
+
+    Step 3: Backpropagation
+        Compute loss (CrossEntropy between predicted logits and true digit).
+        loss.backward() → gradients flow back through layers.
+        optimizer.step() → updates weights.
+        optimizer.zero_grad() → clears old gradients.
+
+    Step 4: Optimizers
+        SGD: simple updates, sensitive to learning rate.
+        Adam: adaptive updates, usually faster for MNIST.
+        Hyperparameters to explore:
+            Learning rate (0.001 vs 0.01 vs 0.1).
+            Batch size (32 vs 128 vs 512).
+
+    Step 5: Overfitting & Regularization
+        Overfitting signs: training accuracy ↑, validation accuracy ↓.
+        Dropout: randomly zero neurons, improves generalization.
+        Weight decay: penalizes large weights.
+        Early stopping: stop when validation loss stops improving.
+
+    Step 6: Code Plan
+        We’ll build this in stages:
+            Baseline classifier (no regularization).
+            Add dropout and compare training vs validation loss.
+            Implement early stopping.
+            Run hyperparameter search (batch size, learning rate).
+            Mini-project: deliberately overfit, then fix with regularization.
