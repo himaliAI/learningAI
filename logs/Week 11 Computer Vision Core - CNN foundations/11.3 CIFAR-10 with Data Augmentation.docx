@@ -1,0 +1,24 @@
+Why Data Augmentation:
+    CIFAR‑10 has only 50,000 training images → relatively small
+    Augmentation creates modified versions (flips, crops, rotations, color jitter)
+    Prevents overfitting and improves robustness
+
+        # Actual codes:
+        # 2. Transformations with augmentation
+        train_transform = transforms.Compose([
+            transforms.RandomHorizontalFlip(),        # flip images left-right
+            transforms.RandomCrop(32, padding=4),     # random crop with padding
+            transforms.ToTensor(),
+            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+        ])
+
+        test_transform = transforms.Compose([
+            transforms.ToTensor(),
+            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+        ])
+
+What changes with Augmentation?
+    1. Training images are randomly flipped and cropped each epoch.
+    2. The model sees slightly different versions of the same image → learns more robust features.
+    3. Validation set is untouched (no augmentation) → fair evaluation.
+    4. Accuracy typically improves by several percentage points compared to training without augmentation.
