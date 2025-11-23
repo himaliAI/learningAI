@@ -1,0 +1,12 @@
+Training deep CNNs from scratch requires massive datasets. 
+Medical imaging datasets are often small. 
+Transfer learning lets us reuse knowledge from large datasets (like ImageNet) and 
+    adapt it to smaller, domain-specific datasets.
+
+How?
+    1. Load a pretrained model (e.g., ResNet18, MobileNet).
+    2. Freeze early layers (keep their weights fixed).
+    3. Replace the final classifier layer with one suited to your dataset 
+        (e.g., 10 classes for CIFAR‑10, 2 classes for cats/dogs).
+    4. Fine‑tune only the last layers.
+
