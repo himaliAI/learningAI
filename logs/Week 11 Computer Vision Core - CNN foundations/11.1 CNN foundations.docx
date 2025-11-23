@@ -1,0 +1,64 @@
+CNN (Convolutional Neural Networks) Basics:
+    specialized  neural network designed for processing grid-like data
+        eg images, video
+    Core Components:
+        1. Convolutional Layers:
+            Purpose: To detect pattern (edges, texture, shapes)
+            How: Small 'filters' slide across the image looking for specific features 
+            Analogy: Like using different magnifying flasses to find specific patterns
+
+        2. Pooling Layers:
+            Purpose: Reduce size while keeping important information
+            How: Downsample by taking maximum/average values
+            Benefit: Makes network translation-invariant (the same filter detects a feature anywhere in the image)
+
+        3. Fully Connected Layers
+            Purpose: Combine features for final classification
+            Location: Usually at the end of the network
+
+1. Image Representation
+    An image is stored as tensor:
+        Grayscale -> shape [1, H, W] # 1 channel, height, width
+        RGB -> shape [3, H, W] # 3 channels: red, green, blue
+        Example: CIFAR-10 image = [3, 32, 32]
+    Each pixel is a feature, but unlike flattening (MNIST -> 784 features), CNNs preserve spatial structure
+
+2. Convolution:
+    Instead of connecting every pixel to every neurone (like fully connectiong layers), CNNs uses filters/kernels:
+        A small matrix (eg 3x3, 5x5) slides across the image
+        At each position, it computes a weighted sum -> detects local patterns
+    
+    Filters learn to detect:
+        Edges (horizontal, vertical)
+        Textures (curves, corners)
+        Complex shapes (digits, faces) in deeper layers
+
+3. Feature Maps:
+    Each filter produces a feature map (activation map)
+        eg: 32 filters -> 32 feature maps 
+    Early layers: simple features (edges, texture)
+    Deeper layers: complex features (digits, objects)
+
+4. Pooling:
+    Pooling layers reduce spatial size while keeping important features 
+    Common: Max pooling (take max value in a region)
+    Benefits:
+        Downsamples -> fewer parameters
+        Adds robustness -> small shifts in the image don't change the pooled output
+
+5. Flattening:
+    After convolution + pooling, you have feature maps (eg, (32, 7, 7))
+        Flatten -> [32*7*7] = 1568 features
+    Feed into fully connected layers for classification
+
+6. CNN Architecture Flow
+    Typical CNN pipeline:
+        input_image -> convolution -> Activation (ReLU) ->
+            Pooling -> Convolution -> Pooling ->
+            Flatten -> Fully_Connected -> Output 
+
+7. Why CNNs Beat Fully Connected Networks 
+    Parameter efficiency: A 3x3 filter has 9 weights, vs thoushands in a fully connected layers
+    Spatial awareness: CNNs preserve the 2D structure of images
+    Feature hierarchy: Build from edges -> shapes -> objects
+    Generalization: Better at recognizing patterns across positions
