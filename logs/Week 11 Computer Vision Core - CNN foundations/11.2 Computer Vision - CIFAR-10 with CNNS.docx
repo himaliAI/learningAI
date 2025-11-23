@@ -1,0 +1,10 @@
+CIFAR-10 images are color images with three channels - RGB
+
+CIFAR-10 CNN code scafold will look similar to MNIST but adapted for RGB and deeper layers.
+
+Differences:
+    Input channels: 3 instead of 1 (RGB vs grayscale)
+    Deeper network: 3 convolution layers instead of 2
+    Image size: CIFAR‑10 is 32×32, so after 3 poolings → 4×4 feature maps
+    Fully connected input size: 128 * 4 * 4 = 2048 features.
+

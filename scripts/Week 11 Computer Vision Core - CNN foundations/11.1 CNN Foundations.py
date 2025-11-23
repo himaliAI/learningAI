@@ -89,4 +89,3 @@ for epoch in range(n_epochs):
     
     print(f"Epoch {epoch+1}: Val Loss = {val_loss/len(test_loader):.4f}")
     print(f"Val Acc = {100*vorrect/len(test_loader.dataset):.2f}%")
-    
