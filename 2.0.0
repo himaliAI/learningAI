@@ -1,0 +1,10 @@
+Collecting portalocker
+  Downloading portalocker-3.2.0-py3-none-any.whl.metadata (8.7 kB)
+Collecting pywin32>=226 (from portalocker)
+  Downloading pywin32-311-cp310-cp310-win_amd64.whl.metadata (10 kB)
+Downloading portalocker-3.2.0-py3-none-any.whl (22 kB)
+Downloading pywin32-311-cp310-cp310-win_amd64.whl (9.6 MB)
+   ----------------------------- 9.6/9.6 MB 5.1 MB/s  0:00:01
+Installing collected packages: pywin32, portalocker
+
+Successfully installed portalocker-3.2.0 pywin32-311

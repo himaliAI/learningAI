@@ -1,0 +1,120 @@
+NLP (Natural Language Processing): Theory and Bascis
+
+1. Text as Data
+    Unlike images (grids of pixels), text is sequential and symbolic
+    Words, sentences, and documents must be converted into numerical representation for models to process 
+
+2. Text Preprocessing
+    Cleaning
+        lowercasing, removing punctuation, stopwords, special characters
+    Tokenization
+        Splitting text into units (words, subwords, characters)
+            word-level: "I love NLP" => [I, love, NLP]
+            Subword-level: "unhappiness" -> [un, happiness]
+    Sequence Padding:
+        ensures all sequences in a batch have the same length
+            Eg: [I, love, NLP] -> [I, love, NLP, <PAD>]
+
+3. Representations
+    Bag-of-Words (BoW):
+        Represents text as word counts
+        Ignores order, simple but limited
+    TF-IDF:
+        Weighs words by importance (rare but informative words get higher weight)
+    Embeddings:
+        Dense vectors capturing semantic meaning
+        Word2Vec / GloVe: static embeddings (same vector for a word everywhere)
+        Contextual embeddings (BERT): word meaning depends on context 
+
+4. Sequence Models 
+    RNNs (Recurrent Neural Networks):
+        Process text sequentially, remembering past words 
+        Struggle with long dependencies (vanishing gradients)
+    LSTMs / GRUs:
+        Improved RNNs with gating mechanisms.
+        Handle longer sequences better
+
+5. Transformers
+    Attention mechanism:
+        lets teh model focus on relevant words ina sequence 
+    Encoder-decoder architecture:
+        Encoder: builds contextual representation of input
+        Decoder: generates output (translation, summarization)
+    BERT, GPT, DistilBERT:
+        Pretrained on massive corpora
+        Fine-tuned for specific tasks (sentiment, spam, NER)
+
+6. Transfer Learning in NLP 
+    Similar to ResNet in vision: start with a pretrained model (BERT)
+    Fine-tune on your dataset
+    Trade-off:
+        Freeze encoder -> faster, less risk of overfitting, but lower accuracy
+        Full fine-tune -> higher accuracy, but risk of overfitting and higher compute cost 
+
+Tokenization Methods in NLP:
+    1. Word level tokenization:
+        Splits text into words using spaces or punctuation
+            Eg: "I love natural language processing" -> [I, love, natural, language, processing]
+        Pros:
+            Simple, intuitive
+            Works well for small vocabularies
+        Cons:
+            Vocabulary explosion (millions of words)
+            Doesn't handle unknown words well (<UNK> problem)
+            Morphologically rich languages (like Nepali or German) suffer because of many word forms
+
+    2. Character-Level Tokenization 
+        Splits text into individual characters 
+            Eg: "NLP" -> [N, L, P]
+        Pros: 
+            No unknown words (every word is just characters)
+            Captures morphology (prefixes, suffixes)
+        Cons:
+            Sequences bedome very long 
+            Harder for models to capture meaning at the word level 
+
+    3. Subword-Level Tokenization (Modern Standard)
+        Splits words into smaller units (subwords)
+            Eg (BERT's WordPiece):  
+                "unhappiness" -> [un, ##happiness]
+                "playing" -> [play, ##ing]
+        Pros:
+            Balances vocabulary size and coverage
+            Handles rare words by breaking them into known subwords 
+            Contextual models (BERT, GPT) rely on this
+        Cons:
+            Slightly more complex processing 
+
+    4. Sentence-Level Tokenization
+        Splits text into sentences before further tokenization
+            Ex: "I love NLP. It is powerful." ->
+                [I love NLP, It is powerful]
+        Often used as Preprocessing step for tasks ike summarization or translation 
+
+    5. Byte-Pair Encoding (BPE)
+        A popular subword method used in GPT, RoBERTa
+        Merges frequent Character pairs iteratively
+            Eg: "lower" -> [low, er]
+                "lowest" => [low, est]
+        Keeps vocabulary manageable while covering rare words 
+
+Sequence Padding:
+    Neural networks expect fixed-length inputs in a batch 
+    Sentences vary in length -> we pad shorter ones with a special <PAD> token 
+        eg: "I love NLP" -> [I, love, NLP, <PAD>, <PAD>]
+            "NLP is powerful" -> [NLP, is, powerful, <PAD>]
+    Padding ensures all sequences in a batch have the same length (say, 5 tokens)
+    Models learn to ignore <PAD> tokens during training
+
+Embeddings:
+    Why? One-hot vectors are sparse and don't capture meaning 
+    Embeddings map words/subwords into dense vectors in continuous space 
+        Eg: "king" -> [0.25, -0.13, 0.78, ....]
+            "queen" -> [0.27, -0.11, 0.80, ....]
+            "apple" -> [0.91, 0.02, -0.33, ....]
+    Words with similar meanings have vectors close together
+    Types:
+        Static embeddings (Word2Vec, GloVe): same vector for a word everywhere
+        Contextual embeddings (BERT, GPT): vector depends on sentence context
+            Eg: "bank" in "river bank" vs "bank account" -> different embeddings
+
